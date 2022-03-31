@@ -38,6 +38,19 @@ class UsersController < ApplicationController
     @user.destroy
   end
 
+
+  # def user_search
+  #   users = params[:q]
+  #   @search = User.any_of({first_name: /#{users}/ , {last_name: /#{users}/, {email: /#{users}/ })
+  # end
+
+  def user_search
+    search_typehead = params[:q]
+    @search = User.any_of({first_name: /#{search_typehead}/}, {last_name: /#{search_typehead}/}, {email: /#{search_typehead}/})
+    render json: @search
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
